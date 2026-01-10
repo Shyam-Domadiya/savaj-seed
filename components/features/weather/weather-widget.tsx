@@ -1,108 +1,107 @@
 "use client"
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Cloud, Sun, CloudRain, Droplets, MapPin, Loader2, AlertCircle } from "lucide-react"
-import { useQuery } from "@tanstack/react-query"
+import { useEffect, useState } from "react"
+import { Cloud, CloudRain, CloudSnow, Sun, Loader2, MapPin } from "lucide-react"
 
 interface WeatherData {
     temperature: number
-    windSpeed: number
-    humidity: number
     weatherCode: number
-}
-
-// Simple weather code mapping for Open-Meteo
-const getWeatherIcon = (code: number) => {
-    if (code <= 1) return <Sun className="h-8 w-8 text-amber-500" />
-    if (code <= 3) return <Cloud className="h-8 w-8 text-gray-500" />
-    if (code <= 67) return <CloudRain className="h-8 w-8 text-blue-500" />
-    return <Cloud className="h-8 w-8 text-gray-500" /> // Default
-}
-
-const getWeatherDescription = (code: number) => {
-    if (code === 0) return "Clear Sky"
-    if (code <= 3) return "Partly Cloudy"
-    if (code <= 48) return "Foggy"
-    if (code <= 67) return "Rainy"
-    if (code <= 77) return "Snowy"
-    if (code <= 82) return "Heavy Rain"
-    if (code <= 99) return "Thunderstorm"
-    return "Unknown"
-}
-
-// Defaulting to Rajkot, Gujarat for demo
-const LAT = 22.3039
-const LONG = 70.8022
-
-async function fetchWeather(): Promise<WeatherData> {
-    const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LONG}&current_weather=true&hourly=relativehumidity_2m`
-    )
-    if (!res.ok) {
-        throw new Error('Failed to fetch weather data')
-    }
-    const data = await res.json()
-
-    // Approximate humidity from hourly data (taking current hour)
-    const hourIndex = new Date().getHours()
-    const humidity = data.hourly.relativehumidity_2m[hourIndex] || 50
-
-    return {
-        temperature: data.current_weather.temperature,
-        windSpeed: data.current_weather.windspeed,
-        weatherCode: data.current_weather.weathercode,
-        humidity: humidity
-    }
+    locationName: string
 }
 
 export function WeatherWidget() {
-    const { data: weather, isLoading, isError } = useQuery({
-        queryKey: ['weather', LAT, LONG],
-        queryFn: fetchWeather,
-        refetchInterval: 1000 * 60 * 15, // Refetch every 15 minutes
-        staleTime: 1000 * 60 * 5, // Consider data fresh for 5 minutes
-    })
+    const [weather, setWeather] = useState<WeatherData | null>(null)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
 
-    if (isError) return null
+    useEffect(() => {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    try {
+                        const { latitude, longitude } = position.coords
+
+                        // Parallel fetch for weather and location
+                        const [weatherRes, locationRes] = await Promise.all([
+                            fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`),
+                            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                        ])
+
+                        const weatherData = await weatherRes.json()
+                        const locationData = await locationRes.json()
+
+                        let locationName = "Unknown Location"
+                        if (locationData.address) {
+                            // Try to find the most relevant city name
+                            locationName = locationData.address.city ||
+                                locationData.address.town ||
+                                locationData.address.village ||
+                                locationData.address.suburb ||
+                                locationData.address.county ||
+                                locationData.address.state ||
+                                "Unknown Location"
+                        }
+
+                        if (weatherData.current_weather) {
+                            setWeather({
+                                temperature: weatherData.current_weather.temperature,
+                                weatherCode: weatherData.current_weather.weathercode,
+                                locationName
+                            })
+                        } else {
+                            setError(true)
+                        }
+                    } catch (err) {
+                        console.error("Error fetching data:", err)
+                        setError(true)
+                    } finally {
+                        setLoading(false)
+                    }
+                },
+                (err) => {
+                    console.error("Geolocation error:", err)
+                    setError(true)
+                    setLoading(false)
+                }
+            )
+        } else {
+            setError(true)
+            setLoading(false)
+        }
+    }, [])
+
+    if (error) return null
+
+    if (loading) {
+        return (
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground bg-muted/30 rounded-full animate-pulse">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>Loading...</span>
+            </div>
+        )
+    }
+
+    if (!weather) return null
+
+    const getWeatherIcon = (code: number) => {
+        if (code <= 1) return <Sun className="h-4 w-4 text-orange-500" />
+        if (code <= 3) return <Cloud className="h-4 w-4 text-gray-500" />
+        if (code <= 67) return <CloudRain className="h-4 w-4 text-blue-500" />
+        if (code <= 77) return <CloudSnow className="h-4 w-4 text-blue-300" />
+        return <Cloud className="h-4 w-4 text-gray-500" />
+    }
 
     return (
-        <Card className="bg-white/80 backdrop-blur-sm border-none shadow-sm min-w-[280px]">
-            <CardContent className="p-4">
-                {isLoading ? (
-                    <div className="flex items-center justify-center h-20 text-muted-foreground">
-                        <Loader2 className="h-6 w-6 animate-spin mr-2" />
-                        Loading weather...
-                    </div>
-                ) : weather ? (
-                    <div className="flex items-center gap-4">
-                        <div className="flex-1">
-                            <div className="flex items-center gap-1 text-xs text-muted-foreground font-medium mb-1 uppercase tracking-wider">
-                                <MapPin className="h-3 w-3" /> Rajkot, Gujarat
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <span className="text-4xl font-bold tracking-tight text-foreground">
-                                    {Math.round(weather.temperature)}°
-                                </span>
-                                <div>
-                                    <div className="text-sm font-semibold capitalize leading-none mb-1">
-                                        {getWeatherDescription(weather.weatherCode)}
-                                    </div>
-                                    <div className="text-xs text-muted-foreground">
-                                        Wind: {weather.windSpeed} km/h
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-col items-center justify-center p-2 rounded-lg bg-blue-50">
-                            {getWeatherIcon(weather.weatherCode)}
-                            <div className="flex items-center gap-1 text-xs font-medium text-blue-700 mt-1">
-                                <Droplets className="h-3 w-3" />
-                                {weather.humidity}%
-                            </div>
-                        </div>
-                    </div>
-                ) : null}
-            </CardContent>
-        </Card>
+        <div className="hidden md:flex items-center gap-3 px-3 py-1.5 text-sm font-medium border rounded-full bg-background/50 hover:bg-muted/50 transition-colors cursor-default" title={`Current weather in ${weather.locationName}`}>
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+                <MapPin className="h-3.5 w-3.5 text-primary" />
+                <span className="max-w-[100px] truncate">{weather.locationName}</span>
+            </div>
+            <div className="h-4 w-px bg-border" />
+            <div className="flex items-center gap-1.5">
+                {getWeatherIcon(weather.weatherCode)}
+                <span>{Math.round(weather.temperature)}°C</span>
+            </div>
+        </div>
     )
 }

@@ -1,10 +1,14 @@
 
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ScreenReaderOnly } from "@/components/shared/screen-reader-only"
 import { LiveChatWidget } from "@/components/features/live-chat/live-chat-widget"
+import { WeatherWidget } from "@/components/features/weather/weather-widget"
+
 
 import { MobileNav } from "@/components/layout/mobile-nav"
 import { Search, Calculator } from "lucide-react"
@@ -60,6 +64,7 @@ export function SiteHeader() {
 
         {/* Header Actions */}
         <div className="flex items-center gap-2">
+          <WeatherWidget />
           <Link href="/search">
             <div className="inline-flex items-center justify-center h-10 w-10 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors">
               <Search className="h-5 w-5" />
