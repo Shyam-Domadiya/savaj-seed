@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { Breadcrumb } from "@/components/breadcrumb"
-import { StructuredData } from "@/components/structured-data"
+import { SiteHeader } from "@/components/layout/site-header"
+import { SiteFooter } from "@/components/layout/site-footer"
+import { Breadcrumb } from "@/components/common/breadcrumb"
+import { StructuredData } from "@/components/providers/structured-data"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { getBlogPost, getBlogPosts, formatDate } from "@/lib/blog"
@@ -74,7 +74,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <div className="flex min-h-screen flex-col bg-background">
       <StructuredData data={[articleSchema, breadcrumbSchema]} />
       <SiteHeader />
-      
+
       <div className="container">
         <Breadcrumb customTitle={post.title} />
       </div>

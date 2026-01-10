@@ -1,0 +1,194 @@
+
+> my-v0-project@0.1.0 build
+> next build
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\shyam\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\shyam\OneDrive\Desktop\SS\zip\Savaj Seeds\package-lock.json
+
+   ▲ Next.js 16.0.10 (Turbopack)
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+   Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 9 errors:
+./OneDrive/Desktop/SS/zip/Savaj Seeds/app/about/page.tsx:3:1
+Module not found: Can't resolve '@/components/breadcrumb'
+  1 | import { SiteHeader } from "@/components/layout/site-header"
+  2 | import { SiteFooter } from "@/components/layout/site-footer"
+> 3 | import { Breadcrumb } from "@/components/breadcrumb"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { StructuredData } from "@/components/structured-data"
+  5 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+  6 | import { Badge } from "@/components/ui/badge"
+
+Import map: aliased to relative './components/breadcrumb' inside of [project]/OneDrive/Desktop/SS/zip/Savaj Seeds
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./OneDrive/Desktop/SS/zip/Savaj Seeds/app/blog/[slug]/page.tsx:5:1
+Module not found: Can't resolve '@/components/breadcrumb'
+  3 | import { SiteHeader } from "@/components/layout/site-header"
+  4 | import { SiteFooter } from "@/components/layout/site-footer"
+> 5 | import { Breadcrumb } from "@/components/breadcrumb"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { StructuredData } from "@/components/structured-data"
+  7 | import { Button } from "@/components/ui/button"
+  8 | import { Separator } from "@/components/ui/separator"
+
+Import map: aliased to relative './components/breadcrumb' inside of [project]/OneDrive/Desktop/SS/zip/Savaj Seeds
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./OneDrive/Desktop/SS/zip/Savaj Seeds/app/blog/page.tsx:4:1
+Module not found: Can't resolve '@/components/breadcrumb'
+  2 | import { SiteHeader } from "@/components/layout/site-header"
+  3 | import { SiteFooter } from "@/components/layout/site-footer"
+> 4 | import { Breadcrumb } from "@/components/breadcrumb"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Badge } from "@/components/ui/badge"
+  6 | import { StructuredData } from "@/components/structured-data"
+  7 | import { getBlogPosts, formatDate } from "@/lib/blog"
+
+Import map: aliased to relative './components/breadcrumb' inside of [project]/OneDrive/Desktop/SS/zip/Savaj Seeds
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./OneDrive/Desktop/SS/zip/Savaj Seeds/app/calculator/page.tsx:4:1
+Module not found: Can't resolve '@/components/breadcrumb'
+  2 | import { SiteHeader } from "@/components/layout/site-header"
+  3 | import { SiteFooter } from "@/components/layout/site-footer"
+> 4 | import { Breadcrumb } from "@/components/breadcrumb"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export const metadata = {
+  7 |     title: "Seed Rate Calculator - Savaj Seeds",
+
+Import map: aliased to relative './components/breadcrumb' inside of [project]/OneDrive/Desktop/SS/zip/Savaj Seeds
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./OneDrive/Desktop/SS/zip/Savaj Seeds/app/testimonials/page.tsx:5:1
+Module not found: Can't resolve '@/components/breadcrumb'
+  3 | import { SiteFooter } from '@/components/layout/site-footer';
+  4 | import { TestimonialsSection } from '@/components/sections/testimonials-section';
+> 5 | import { Breadcrumb } from '@/components/breadcrumb';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | export const metadata: Metadata = {
+  8 |   title: 'Customer Testimonials - Savaj Seeds',
+
+Import map: aliased to relative './components/breadcrumb' inside of [project]/OneDrive/Desktop/SS/zip/Savaj Seeds
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./OneDrive/Desktop/SS/zip/Savaj Seeds/components/layout/mobile-nav.tsx:8:1
+Module not found: Can't resolve '@/components/search'
+   6 | import { Button } from "@/components/ui/button"
+   7 | import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader } from "@/components/ui/sheet"
+>  8 | import { SearchComponent } from "@/components/search"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { Menu, X, Home, Package, BookOpen, Phone, Info, HelpCircle } from "lucide-react"
+  10 | import { cn } from "@/lib/utils"
+  11 |
+
+Import map: aliased to relative './components/search' inside of [project]/OneDrive/Desktop/SS/zip/Savaj Seeds
+
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Desktop/SS/zip/Savaj Seeds/components/layout/mobile-nav.tsx [Client Component Browser]
+    ./OneDrive/Desktop/SS/zip/Savaj Seeds/components/layout/site-header.tsx [Client Component Browser]
+    ./OneDrive/Desktop/SS/zip/Savaj Seeds/app/contact/page.tsx [Client Component Browser]
+    ./OneDrive/Desktop/SS/zip/Savaj Seeds/app/contact/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Desktop/SS/zip/Savaj Seeds/components/layout/mobile-nav.tsx [Client Component SSR]
+    ./OneDrive/Desktop/SS/zip/Savaj Seeds/components/layout/site-header.tsx [Client Component SSR]
+    ./OneDrive/Desktop/SS/zip/Savaj Seeds/app/contact/page.tsx [Client Component SSR]
+    ./OneDrive/Desktop/SS/zip/Savaj Seeds/app/contact/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./OneDrive/Desktop/SS/zip/Savaj Seeds/app/about/page.tsx:4:1
+Module not found: Can't resolve '@/components/structured-data'
+  2 | import { SiteFooter } from "@/components/layout/site-footer"
+  3 | import { Breadcrumb } from "@/components/breadcrumb"
+> 4 | import { StructuredData } from "@/components/structured-data"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+  6 | import { Badge } from "@/components/ui/badge"
+  7 | import { generateBreadcrumbSchema, generateOrganizationSchema } from "@/lib/seo"
+
+Import map: aliased to relative './components/structured-data' inside of [project]/OneDrive/Desktop/SS/zip/Savaj Seeds
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./OneDrive/Desktop/SS/zip/Savaj Seeds/app/blog/[slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/structured-data'
+  4 | import { SiteFooter } from "@/components/layout/site-footer"
+  5 | import { Breadcrumb } from "@/components/breadcrumb"
+> 6 | import { StructuredData } from "@/components/structured-data"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Button } from "@/components/ui/button"
+  8 | import { Separator } from "@/components/ui/separator"
+  9 | import { getBlogPost, getBlogPosts, formatDate } from "@/lib/blog"
+
+Import map: aliased to relative './components/structured-data' inside of [project]/OneDrive/Desktop/SS/zip/Savaj Seeds
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./OneDrive/Desktop/SS/zip/Savaj Seeds/app/blog/page.tsx:6:1
+Module not found: Can't resolve '@/components/structured-data'
+  4 | import { Breadcrumb } from "@/components/breadcrumb"
+  5 | import { Badge } from "@/components/ui/badge"
+> 6 | import { StructuredData } from "@/components/structured-data"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { getBlogPosts, formatDate } from "@/lib/blog"
+  8 | import { generateMetadata as generateSEOMetadata, generateBreadcrumbSchema } from "@/lib/seo"
+  9 | import { Calendar, ArrowRight, Sprout } from "lucide-react"
+
+Import map: aliased to relative './components/structured-data' inside of [project]/OneDrive/Desktop/SS/zip/Savaj Seeds
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./OneDrive/Desktop/SS/zip/Savaj Seeds/app/about/page.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./OneDrive/Desktop/SS/zip/Savaj Seeds/app/blog/[slug]/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./OneDrive/Desktop/SS/zip/Savaj Seeds/app/blog/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./OneDrive/Desktop/SS/zip/Savaj Seeds/app/calculator/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./OneDrive/Desktop/SS/zip/Savaj Seeds/app/testimonials/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./OneDrive/Desktop/SS/zip/Savaj Seeds/components/layout/mobile-nav.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./OneDrive/Desktop/SS/zip/Savaj Seeds/app/about/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./OneDrive/Desktop/SS/zip/Savaj Seeds/app/blog/[slug]/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./OneDrive/Desktop/SS/zip/Savaj Seeds/app/blog/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

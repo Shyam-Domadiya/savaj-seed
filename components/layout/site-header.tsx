@@ -5,8 +5,8 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 
-import { MobileNav } from "@/components/mobile-nav"
-import { ScreenReaderOnly } from "@/components/screen-reader-only"
+import { MobileNav } from "@/components/layout/mobile-nav"
+import { ScreenReaderOnly } from "@/components/common/screen-reader-only"
 import { Search, Calculator } from "lucide-react"
 import { cn } from "@/lib/utils"
 

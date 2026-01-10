@@ -1,48 +1,47 @@
 "use client"
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Star, ThumbsUp, User } from 'lucide-react';
 import { ProductReview, ReviewSummary } from '@/lib/types/testimonials';
 import { cn, formatDate } from '@/lib/utils';
+import { useQuery } from '@tanstack/react-query';
 
 interface ProductReviewsProps {
   productId: string;
   className?: string;
 }
 
+interface ReviewsResponse {
+  success: boolean;
+  data: ProductReview[];
+  summary: ReviewSummary;
+}
+
+const fetchReviews = async (productId: string): Promise<ReviewsResponse> => {
+  const response = await fetch(`/api/reviews?productId=${productId}`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+};
+
 export function ProductReviews({ productId, className }: ProductReviewsProps) {
-  const [reviews, setReviews] = useState<ProductReview[]>([]);
-  const [summary, setSummary] = useState<ReviewSummary | null>(null);
-  const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
 
-  useEffect(() => {
-    fetchReviews();
-  }, [productId]);
+  const { data, isLoading } = useQuery({
+    queryKey: ['reviews', productId],
+    queryFn: () => fetchReviews(productId),
+  });
 
-  const fetchReviews = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(`/api/reviews?productId=${productId}`);
-      const data = await response.json();
-      
-      if (data.success) {
-        setReviews(data.data);
-        setSummary(data.summary);
-      }
-    } catch (error) {
-      console.error('Error fetching reviews:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const reviews = data?.data || [];
+  const summary = data?.summary;
 
   const displayedReviews = showAll ? reviews : reviews.slice(0, 3);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className={cn("space-y-4", className)}>
         <div className="animate-pulse">
@@ -97,15 +96,15 @@ export function ProductReviews({ productId, className }: ProductReviewsProps) {
                   {summary.totalReviews} reviews
                 </div>
               </div>
-              
+
               <div className="flex-1 space-y-2">
                 {[5, 4, 3, 2, 1].map((rating) => (
                   <div key={rating} className="flex items-center gap-2 text-sm">
                     <span className="w-3">{rating}</span>
                     <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                    <Progress 
-                      value={(summary.ratingDistribution[rating as keyof typeof summary.ratingDistribution] / summary.totalReviews) * 100} 
-                      className="flex-1 h-2" 
+                    <Progress
+                      value={(summary.ratingDistribution[rating as keyof typeof summary.ratingDistribution] / summary.totalReviews) * 100}
+                      className="flex-1 h-2"
                     />
                     <span className="w-8 text-muted-foreground">
                       {summary.ratingDistribution[rating as keyof typeof summary.ratingDistribution]}
@@ -127,7 +126,7 @@ export function ProductReviews({ productId, className }: ProductReviewsProps) {
                 <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted">
                   <User className="w-5 h-5 text-muted-foreground" />
                 </div>
-                
+
                 <div className="flex-1 space-y-3">
                   <div className="flex items-center justify-between">
                     <div>
@@ -150,12 +149,12 @@ export function ProductReviews({ productId, className }: ProductReviewsProps) {
                       {formatDate(review.dateSubmitted)}
                     </div>
                   </div>
-                  
+
                   <div>
                     <h5 className="font-medium mb-2">{review.title}</h5>
                     <p className="text-muted-foreground leading-relaxed">{review.review}</p>
                   </div>
-                  
+
                   {review.verified && (
                     <div className="flex items-center gap-2">
                       <div className="flex items-center gap-1 text-sm text-green-600">
@@ -166,7 +165,7 @@ export function ProductReviews({ productId, className }: ProductReviewsProps) {
                       </div>
                     </div>
                   )}
-                  
+
                   <div className="flex items-center gap-4 pt-2">
                     <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
                       <ThumbsUp className="w-4 h-4 mr-1" />
@@ -183,8 +182,8 @@ export function ProductReviews({ productId, className }: ProductReviewsProps) {
       {/* Show More/Less Button */}
       {reviews.length > 3 && (
         <div className="text-center">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={() => setShowAll(!showAll)}
             className="hover:scale-105 transition-transform duration-300"
           >

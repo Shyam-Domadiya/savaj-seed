@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { TestimonialsCarousel } from '@/components/testimonials-carousel';
+import { TestimonialsCarousel } from '@/components/sections/testimonials-carousel';
 import { Button } from '@/components/ui/button';
 import { Testimonial } from '@/lib/types/testimonials';
 import Link from 'next/link';
@@ -14,11 +14,11 @@ interface TestimonialsSectionProps {
   className?: string;
 }
 
-export function TestimonialsSection({ 
-  showFeaturedOnly = true, 
+export function TestimonialsSection({
+  showFeaturedOnly = true,
   limit = 5,
   showViewAllButton = true,
-  className 
+  className
 }: TestimonialsSectionProps) {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
@@ -36,7 +36,7 @@ export function TestimonialsSection({
 
       const response = await fetch(`/api/testimonials?${params.toString()}`);
       const data = await response.json();
-      
+
       if (data.success) {
         setTestimonials(data.data);
       }
@@ -83,7 +83,7 @@ export function TestimonialsSection({
         </div>
 
         <div className="animate-in fade-in-50 slide-in-from-bottom-6 duration-700 delay-200">
-          <TestimonialsCarousel 
+          <TestimonialsCarousel
             testimonials={testimonials}
             autoPlay={true}
             autoPlayInterval={6000}
@@ -92,9 +92,9 @@ export function TestimonialsSection({
 
         {showViewAllButton && (
           <div className="text-center mt-12 animate-in fade-in-50 slide-in-from-bottom-4 duration-700 delay-400">
-            <Button 
-              asChild 
-              variant="outline" 
+            <Button
+              asChild
+              variant="outline"
               size="lg"
               className="hover:scale-105 transition-all duration-300 hover:shadow-lg"
             >

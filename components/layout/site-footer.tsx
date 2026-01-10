@@ -13,8 +13,8 @@ import {
   Youtube,
   Linkedin
 } from "lucide-react"
-import { ScreenReaderOnly } from "@/components/screen-reader-only"
-import { WeatherWidget } from "@/components/weather-widget"
+import { ScreenReaderOnly } from "@/components/common/screen-reader-only"
+import { WeatherWidget } from "@/components/features/weather-widget"
 import { businessInfo } from "@/lib/data/team"
 
 export function SiteFooter() {

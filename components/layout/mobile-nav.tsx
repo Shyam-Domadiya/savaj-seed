@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader } from "@/components/ui/sheet"
-import { SearchComponent } from "@/components/search"
+import { SearchComponent } from "@/components/features/search"
 import { Menu, X, Home, Package, BookOpen, Phone, Info, HelpCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 

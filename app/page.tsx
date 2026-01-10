@@ -1,15 +1,16 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { TestimonialsSection } from "@/components/testimonials-section"
-import { CropCalendar } from "@/components/crop-calendar"
 
-import { ScreenReaderOnly } from "@/components/screen-reader-only"
-import { Sprout, Leaf, Package, TrendingUp, Shield, Users, ArrowRight, Award, ShieldCheck } from "lucide-react"
+import { SiteHeader } from "@/components/layout/site-header"
+import { SiteFooter } from "@/components/layout/site-footer"
+import { TestimonialsSection } from "@/components/sections/testimonials-section"
+import { CropCalendar } from "@/components/sections/crop-calendar"
+
+import { ScreenReaderOnly } from "@/components/common/screen-reader-only"
+import { Sprout, Leaf, Package, Users, ArrowRight, Award, ShieldCheck } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export default function HomePage() {
@@ -26,10 +27,14 @@ export default function HomePage() {
           {/* Hero Background Image */}
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-black/40 z-10" />
-            <img
+            <Image
               src="/images/hero-bg.jpg"
               alt="Lush green agricultural field at sunrise"
-              className="w-full h-full object-cover scale-105 animate-zoom-in"
+              fill
+              priority
+              quality={90}
+              className="object-cover scale-105 animate-zoom-in"
+              sizes="100vw"
             />
           </div>
 
@@ -156,10 +161,12 @@ export default function HomePage() {
               <Link href="/products?category=vegetable" className="group relative h-[400px] overflow-hidden rounded-2xl cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500 animate-in fade-in-50 slide-in-from-bottom-8 delay-100">
                 <div className="absolute inset-0">
                   <div className="absolute inset-0 bg-black/40 z-10 group-hover:bg-black/30 transition-colors duration-500" />
-                  <img
+                  <Image
                     src="/images/category-vegetable.jpg"
                     alt="Vegetable Seeds"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
 
@@ -183,10 +190,12 @@ export default function HomePage() {
               <Link href="/products?category=crop" className="group relative h-[400px] overflow-hidden rounded-2xl cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500 animate-in fade-in-50 slide-in-from-bottom-8 delay-200">
                 <div className="absolute inset-0">
                   <div className="absolute inset-0 bg-black/40 z-10 group-hover:bg-black/30 transition-colors duration-500" />
-                  <img
+                  <Image
                     src="/images/category-crop.jpg"
                     alt="Crop Seeds"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
 
@@ -210,10 +219,12 @@ export default function HomePage() {
               <Link href="/products?category=hybrid" className="group relative h-[400px] overflow-hidden rounded-2xl cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500 animate-in fade-in-50 slide-in-from-bottom-8 delay-300">
                 <div className="absolute inset-0">
                   <div className="absolute inset-0 bg-black/40 z-10 group-hover:bg-black/30 transition-colors duration-500" />
-                  <img
+                  <Image
                     src="/images/category-hybrid.jpg"
                     alt="Hybrid Seeds"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
 

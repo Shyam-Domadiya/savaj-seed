@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react"
 import { Product, ProductSort } from "@/lib/types/product"
-import { ProductFilterState } from "@/components/product-filter"
+import { ProductFilterState } from "@/components/product/product-filter"
 
 interface UseProductFilterProps {
   products: Product[]
@@ -36,7 +36,7 @@ export function useProductFilter({
 
       // Season filter
       if (filters.seasons.length > 0) {
-        const hasMatchingSeason = filters.seasons.some(season => 
+        const hasMatchingSeason = filters.seasons.some(season =>
           product.seasonality && product.seasonality.includes(season)
         )
         if (!hasMatchingSeason) return false
@@ -64,7 +64,7 @@ export function useProductFilter({
   // Sort filtered products
   const sortedProducts = useMemo(() => {
     const sorted = [...filteredProducts]
-    
+
     sorted.sort((a, b) => {
       let aValue: any
       let bValue: any
@@ -156,8 +156,8 @@ export function useProductFilter({
     if (typeof window === 'undefined' || process.env.NODE_ENV === 'test') {
       return
     }
-    
-    const hasActiveFilters = 
+
+    const hasActiveFilters =
       filters.categories.length > 0 ||
       filters.seasons.length > 0 ||
       filters.difficultyLevels.length > 0 ||
@@ -176,15 +176,15 @@ export function useProductFilter({
     if (typeof window === 'undefined' || process.env.NODE_ENV === 'test') {
       return
     }
-    
+
     try {
       const savedFilters = localStorage.getItem('productFilters')
       const savedSort = localStorage.getItem('productSort')
-      
+
       if (savedFilters) {
         setFilters(JSON.parse(savedFilters))
       }
-      
+
       if (savedSort) {
         setSort(JSON.parse(savedSort))
       }

@@ -1,9 +1,9 @@
 "use client"
 
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { Breadcrumb } from "@/components/breadcrumb"
-import { StructuredData } from "@/components/structured-data"
+import { SiteHeader } from "@/components/layout/site-header"
+import { SiteFooter } from "@/components/layout/site-footer"
+import { Breadcrumb } from "@/components/common/breadcrumb"
+import { StructuredData } from "@/components/providers/structured-data"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { generateBreadcrumbSchema, generateLocalBusinessSchema } from "@/lib/seo"
@@ -31,7 +31,7 @@ export default function AhmedabadLocationPage() {
     <div className="flex min-h-screen flex-col">
       <StructuredData data={[breadcrumbSchema, localBusinessSchema]} />
       <SiteHeader />
-      
+
       <div className="container">
         <Breadcrumb />
       </div>
@@ -112,14 +112,14 @@ export default function AhmedabadLocationPage() {
                     </div>
 
                     <div className="flex gap-3">
-                      <Button 
+                      <Button
                         className="flex-1"
                         onClick={() => window.open("https://maps.google.com/?q=Savaj+Seeds+GIDC+Ahmedabad")}
                       >
                         <Navigation className="w-4 h-4 mr-2" />
                         Get Directions
                       </Button>
-                      <Button 
+                      <Button
                         variant="outline"
                         onClick={() => window.open("tel:+917923456789")}
                       >
@@ -177,7 +177,7 @@ export default function AhmedabadLocationPage() {
                           <h3 className="text-xl font-semibold">Interactive Map</h3>
                           <p className="text-muted-foreground">Click to view our location on Google Maps</p>
                         </div>
-                        <Button 
+                        <Button
                           onClick={() => window.open("https://maps.google.com/?q=23.0225,72.5714")}
                         >
                           View on Google Maps

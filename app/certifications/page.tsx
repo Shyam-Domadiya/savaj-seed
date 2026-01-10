@@ -1,9 +1,9 @@
 "use client"
 
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { Breadcrumb } from "@/components/breadcrumb"
-import { StructuredData } from "@/components/structured-data"
+import { SiteHeader } from "@/components/layout/site-header"
+import { SiteFooter } from "@/components/layout/site-footer"
+import { Breadcrumb } from "@/components/common/breadcrumb"
+import { StructuredData } from "@/components/providers/structured-data"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { generateBreadcrumbSchema } from "@/lib/seo"
@@ -106,7 +106,7 @@ export default function CertificationsPage() {
     <div className="flex min-h-screen flex-col">
       <StructuredData data={breadcrumbSchema} />
       <SiteHeader />
-      
+
       <div className="container">
         <Breadcrumb />
       </div>
@@ -158,7 +158,7 @@ export default function CertificationsPage() {
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       {cert.description}
                     </p>
-                    
+
                     <div className="space-y-2">
                       <h4 className="font-semibold text-sm">Key Benefits:</h4>
                       <ul className="space-y-1">
@@ -201,7 +201,7 @@ export default function CertificationsPage() {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 These certifications represent our unwavering commitment to providing farmers with the highest quality seeds and agricultural solutions. Every certification is earned through rigorous testing, continuous improvement, and adherence to international standards.
               </p>
-              
+
               <div className="grid md:grid-cols-3 gap-8 mt-12">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
@@ -212,7 +212,7 @@ export default function CertificationsPage() {
                     Every batch tested for purity, germination, and disease resistance
                   </p>
                 </div>
-                
+
                 <div className="text-center">
                   <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
                     <Award className="w-8 h-8" />
@@ -222,7 +222,7 @@ export default function CertificationsPage() {
                     Compliance with global quality and safety standards
                   </p>
                 </div>
-                
+
                 <div className="text-center">
                   <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle className="w-8 h-8" />

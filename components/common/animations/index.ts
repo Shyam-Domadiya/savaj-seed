@@ -1,4 +1,4 @@
-export { default as PageTransition } from "../page-transition";
+export { default as PageTransition } from "../../layout/page-transition";
 export { default as FadeIn } from "./fade-in";
 export { default as StaggerContainer, StaggerItem } from "./stagger-container";
 export { default as ScaleIn } from "./scale-in";

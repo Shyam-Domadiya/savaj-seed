@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
-import { Calculator, Wheat, Sprout, RefreshCw } from "lucide-react"
+import { Calculator, RefreshCw } from "lucide-react"
 
 // Seed Rate Data (approximate values for demo)
 const seedRates: Record<string, { rate: number; unit: string; packetSize?: string }> = {

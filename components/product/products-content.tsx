@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { ProductFilter } from "@/components/product-filter"
-import { ProductComparison } from "@/components/product-comparison"
+import { ProductFilter } from "@/components/product/product-filter"
+import { ProductComparison } from "@/components/product/product-comparison"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"

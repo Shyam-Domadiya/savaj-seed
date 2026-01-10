@@ -3,17 +3,24 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/toaster"
-import { BackToTop } from "@/components/back-to-top"
-import { PerformanceMonitor } from "@/components/performance-monitor"
-import { SkipNav } from "@/components/skip-nav"
-import { StructuredData } from "@/components/structured-data"
-import { AnalyticsProvider } from "@/components/analytics-provider"
-import { ConsentBanner } from "@/components/consent-banner"
+import { BackToTop } from "@/components/layout/back-to-top"
+import { PerformanceMonitor } from "@/components/features/performance-monitor"
+import { SkipNav } from "@/components/layout/skip-nav"
+import { StructuredData } from "@/components/providers/structured-data"
+import { AnalyticsProvider } from "@/components/providers/analytics-provider"
+import { ConsentBanner } from "@/components/providers/consent-banner"
 import { generateBusinessSchema, generateWebsiteSchema, generateOrganizationSchema, generateServiceSchema } from "@/lib/seo"
+import { Providers } from "@/components/providers/providers"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const _geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
+const _geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+})
 
 export const metadata: Metadata = {
   title: "Savaj Seeds - Happiness from the Farmer's Field | Premium Quality Seeds",
@@ -207,11 +214,9 @@ export default function RootLayout({
   const serviceSchema = generateServiceSchema()
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${_geist.variable} ${_geistMono.variable}`}>
       <head>
         <StructuredData data={[businessSchema, websiteSchema, organizationSchema, serviceSchema]} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -229,13 +234,15 @@ export default function RootLayout({
       </head>
       <body className={`font-sans antialiased`}>
         <AnalyticsProvider>
-          <SkipNav />
-          {children}
-          <BackToTop />
-          <PerformanceMonitor enableConsoleLogging={false} />
-          <Toaster />
-          <Analytics />
-          <ConsentBanner />
+          <Providers>
+            <SkipNav />
+            {children}
+            <BackToTop />
+            <PerformanceMonitor enableConsoleLogging={false} />
+            <Toaster />
+            <Analytics />
+            <ConsentBanner />
+          </Providers>
         </AnalyticsProvider>
       </body>
     </html>

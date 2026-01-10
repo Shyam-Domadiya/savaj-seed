@@ -1,8 +1,8 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { Breadcrumb } from "@/components/breadcrumb"
-import { ProductsContent } from "@/components/products-content"
-import { StructuredData } from "@/components/structured-data"
+import { SiteHeader } from "@/components/layout/site-header"
+import { SiteFooter } from "@/components/layout/site-footer"
+import { Breadcrumb } from "@/components/common/breadcrumb"
+import { ProductsContent } from "@/components/product/products-content"
+import { StructuredData } from "@/components/providers/structured-data"
 import { generateMetadata as generateSEOMetadata, generateBreadcrumbSchema } from "@/lib/seo"
 
 export const metadata = generateSEOMetadata({
@@ -28,7 +28,7 @@ export default function ProductsPage() {
     <div className="flex min-h-screen flex-col">
       <StructuredData data={breadcrumbSchema} />
       <SiteHeader />
-      
+
       <div className="container">
         <Breadcrumb />
       </div>

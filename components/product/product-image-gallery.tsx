@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
-import { LazyImage } from "@/components/lazy-image"
+import { LazyImage } from "@/components/common/lazy-image"
 import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog"

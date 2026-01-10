@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { TestimonialsSection } from '@/components/testimonials-section';
-import { Breadcrumb } from '@/components/breadcrumb';
+import { SiteHeader } from '@/components/layout/site-header';
+import { SiteFooter } from '@/components/layout/site-footer';
+import { TestimonialsSection } from '@/components/sections/testimonials-section';
+import { Breadcrumb } from '@/components/common/breadcrumb';
 
 export const metadata: Metadata = {
   title: 'Customer Testimonials - Savaj Seeds',
@@ -13,15 +13,10 @@ export default function TestimonialsPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      
+
       <main className="flex-1">
         <div className="container py-8">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Testimonials', href: '/testimonials' }
-            ]} 
-          />
+          <Breadcrumb />
         </div>
 
         <section className="py-12 md:py-16">
@@ -37,7 +32,7 @@ export default function TestimonialsPage() {
           </div>
         </section>
 
-        <TestimonialsSection 
+        <TestimonialsSection
           showFeaturedOnly={false}
           limit={20}
           showViewAllButton={false}

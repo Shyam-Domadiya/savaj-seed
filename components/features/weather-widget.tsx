@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { Cloud, Sun, CloudRain, Wind, Droplets, MapPin, Loader2 } from "lucide-react"
+import { Cloud, Sun, CloudRain, Droplets, MapPin, Loader2, AlertCircle } from "lucide-react"
+import { useQuery } from "@tanstack/react-query"
 
 interface WeatherData {
     temperature: number
@@ -30,50 +30,45 @@ const getWeatherDescription = (code: number) => {
     return "Unknown"
 }
 
+// Defaulting to Rajkot, Gujarat for demo
+const LAT = 22.3039
+const LONG = 70.8022
+
+async function fetchWeather(): Promise<WeatherData> {
+    const res = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LONG}&current_weather=true&hourly=relativehumidity_2m`
+    )
+    if (!res.ok) {
+        throw new Error('Failed to fetch weather data')
+    }
+    const data = await res.json()
+
+    // Approximate humidity from hourly data (taking current hour)
+    const hourIndex = new Date().getHours()
+    const humidity = data.hourly.relativehumidity_2m[hourIndex] || 50
+
+    return {
+        temperature: data.current_weather.temperature,
+        windSpeed: data.current_weather.windspeed,
+        weatherCode: data.current_weather.weathercode,
+        humidity: humidity
+    }
+}
+
 export function WeatherWidget() {
-    const [weather, setWeather] = useState<WeatherData | null>(null)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
+    const { data: weather, isLoading, isError } = useQuery({
+        queryKey: ['weather', LAT, LONG],
+        queryFn: fetchWeather,
+        refetchInterval: 1000 * 60 * 15, // Refetch every 15 minutes
+        staleTime: 1000 * 60 * 5, // Consider data fresh for 5 minutes
+    })
 
-    useEffect(() => {
-        // Defaulting to Rajkot, Gujarat for demo
-        const lat = 22.3039
-        const long = 70.8022
-
-        async function fetchWeather() {
-            try {
-                const res = await fetch(
-                    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current_weather=true&hourly=relativehumidity_2m`
-                )
-                const data = await res.json()
-
-                // Approximate humidity from hourly data (taking current hour)
-                const hourIndex = new Date().getHours()
-                const humidity = data.hourly.relativehumidity_2m[hourIndex] || 50
-
-                setWeather({
-                    temperature: data.current_weather.temperature,
-                    windSpeed: data.current_weather.windspeed,
-                    weatherCode: data.current_weather.weathercode,
-                    humidity: humidity
-                })
-            } catch (err) {
-                console.error("Failed to fetch weather", err)
-                setError(true)
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        fetchWeather()
-    }, [])
-
-    if (error) return null
+    if (isError) return null
 
     return (
         <Card className="bg-white/80 backdrop-blur-sm border-none shadow-sm min-w-[280px]">
             <CardContent className="p-4">
-                {loading ? (
+                {isLoading ? (
                     <div className="flex items-center justify-center h-20 text-muted-foreground">
                         <Loader2 className="h-6 w-6 animate-spin mr-2" />
                         Loading weather...

@@ -1,13 +1,13 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { Breadcrumb } from "@/components/breadcrumb"
-import { StructuredData } from "@/components/structured-data"
+import { SiteHeader } from "@/components/layout/site-header"
+import { SiteFooter } from "@/components/layout/site-footer"
+import { Breadcrumb } from "@/components/common/breadcrumb"
+import { StructuredData } from "@/components/providers/structured-data"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { generateBreadcrumbSchema, generateOrganizationSchema } from "@/lib/seo"
 import { Sprout, Users, Award, TrendingUp, Leaf, Shield } from "lucide-react"
 import { Metadata } from "next"
-import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations"
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/common/animations"
 
 export const metadata: Metadata = {
   title: "About Savaj Seeds - Leading Agricultural Solutions Provider in Gujarat",

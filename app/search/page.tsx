@@ -1,7 +1,7 @@
 import { Suspense } from "react"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { Breadcrumb } from "@/components/breadcrumb"
+import { SiteHeader } from "@/components/layout/site-header"
+import { SiteFooter } from "@/components/layout/site-footer"
+import { Breadcrumb } from "@/components/common/breadcrumb"
 import { getBlogPosts } from "@/lib/blog"
 import { SearchResults } from "./search-results"
 
