@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { SiteHeader } from "@/components/layout/site-header"
 import { SiteFooter } from "@/components/layout/site-footer"
 
-import { CropCalendar } from "@/components/sections/crop-calendar"
+import { CropCalendar } from "@/components/sections/resources/CropCalendar"
 
 import { ScreenReaderOnly } from "@/components/shared/screen-reader-only"
 import { Sprout, Leaf, Package, Users, ArrowRight, Award, ShieldCheck } from "lucide-react"

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { TestimonialsCarousel } from '@/components/sections/testimonials-carousel';
+import { TestimonialsCarousel } from '@/components/sections/testimonials/TestimonialsCarousel';
 import { Button } from '@/components/ui/button';
 import { Testimonial } from '@/lib/types/testimonials';
 import Link from 'next/link';
