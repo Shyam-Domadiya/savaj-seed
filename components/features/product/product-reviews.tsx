@@ -5,56 +5,35 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Star, ThumbsUp, User } from 'lucide-react';
-import { ProductReview, ReviewSummary } from '@/lib/types/testimonials';
+import { ReviewSummary } from '@/lib/types/testimonials';
 import { cn, formatDate } from '@/lib/utils';
-import { useQuery } from '@tanstack/react-query';
+import { mockProductReviews } from '@/lib/data/testimonials';
 
 interface ProductReviewsProps {
   productId: string;
   className?: string;
 }
 
-interface ReviewsResponse {
-  success: boolean;
-  data: ProductReview[];
-  summary: ReviewSummary;
-}
-
-const fetchReviews = async (productId: string): Promise<ReviewsResponse> => {
-  const response = await fetch(`/api/reviews?productId=${productId}`);
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-};
-
 export function ProductReviews({ productId, className }: ProductReviewsProps) {
   const [showAll, setShowAll] = useState(false);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['reviews', productId],
-    queryFn: () => fetchReviews(productId),
-  });
+  // In a real static app, you might want to filter these by productId if you had diverse mock data
+  const reviews = mockProductReviews;
 
-  const reviews = data?.data || [];
-  const summary = data?.summary;
+  // Calculate summary from mock daata
+  const summary: ReviewSummary = {
+    averageRating: reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length,
+    totalReviews: reviews.length,
+    ratingDistribution: {
+      5: reviews.filter(r => r.rating === 5).length,
+      4: reviews.filter(r => r.rating === 4).length,
+      3: reviews.filter(r => r.rating === 3).length,
+      2: reviews.filter(r => r.rating === 2).length,
+      1: reviews.filter(r => r.rating === 1).length,
+    }
+  };
 
   const displayedReviews = showAll ? reviews : reviews.slice(0, 3);
-
-  if (isLoading) {
-    return (
-      <div className={cn("space-y-4", className)}>
-        <div className="animate-pulse">
-          <div className="h-6 bg-muted rounded w-1/3 mb-4"></div>
-          <div className="space-y-3">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="h-24 bg-muted rounded"></div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   if (!reviews.length) {
     return (

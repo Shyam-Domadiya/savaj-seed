@@ -358,17 +358,19 @@ export const trackTimeOnPage = (seconds: number, page_path: string) => {
 // Send data to custom analytics API
 const sendToAnalyticsAPI = async (type: string, data: any) => {
   try {
-    await fetch('/api/analytics/track', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        type,
-        data,
-        timestamp: new Date().toISOString(),
-      }),
-    })
+    // Backend analytics disabled for static export
+    // await fetch('/api/analytics/track', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     type,
+    //     data,
+    //     timestamp: new Date().toISOString(),
+    //   }),
+    // })
+    console.debug('Analytics track:', type, data);
   } catch (error) {
     // Silently fail - analytics should not break the user experience
     console.debug('Analytics API error:', error)

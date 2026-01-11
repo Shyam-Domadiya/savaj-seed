@@ -174,7 +174,7 @@ export default function RootLayout({
   const serviceSchema = generateServiceSchema()
 
   return (
-    <html lang="en" className={`${_geist.variable} ${_geistMono.variable}`}>
+    <html lang="en" className={`${_geist.variable} ${_geistMono.variable}`} suppressHydrationWarning>
       <head>
         <StructuredData data={[businessSchema, websiteSchema, organizationSchema, serviceSchema]} />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
@@ -198,7 +198,7 @@ export default function RootLayout({
             <SkipNav />
             {children}
             <BackToTop />
-            <PerformanceMonitor enableConsoleLogging={false} />
+            {/* <PerformanceMonitor enableConsoleLogging={false} /> */}
             <Toaster />
             <Analytics />
             <ConsentBanner />

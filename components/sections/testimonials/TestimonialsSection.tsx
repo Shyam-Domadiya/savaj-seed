@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { TestimonialsCarousel } from '@/components/sections/testimonials/TestimonialsCarousel';
 import { Button } from '@/components/ui/button';
 import { Testimonial } from '@/lib/types/testimonials';
+import { mockTestimonials } from '@/lib/data/testimonials';
 import Link from 'next/link';
 import { ArrowRight, Users } from 'lucide-react';
 
@@ -24,28 +25,25 @@ export function TestimonialsSection({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchTestimonials();
-  }, [showFeaturedOnly, limit]);
-
-  const fetchTestimonials = async () => {
-    try {
+    // Simulate loading for better UX or directly set
+    const loadData = () => {
       setLoading(true);
-      const params = new URLSearchParams();
-      if (showFeaturedOnly) params.append('featured', 'true');
-      if (limit) params.append('limit', limit.toString());
+      let data = [...mockTestimonials];
 
-      const response = await fetch(`/api/testimonials?${params.toString()}`);
-      const data = await response.json();
-
-      if (data.success) {
-        setTestimonials(data.data);
+      if (showFeaturedOnly) {
+        data = data.filter(t => t.featured);
       }
-    } catch (error) {
-      console.error('Error fetching testimonials:', error);
-    } finally {
+
+      if (limit) {
+        data = data.slice(0, limit);
+      }
+
+      setTestimonials(data);
       setLoading(false);
-    }
-  };
+    };
+
+    loadData();
+  }, [showFeaturedOnly, limit]);
 
   if (loading) {
     return (
