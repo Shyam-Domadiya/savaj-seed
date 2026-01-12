@@ -9,22 +9,25 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Search, Sprout, FileText, ArrowRight, Package } from "lucide-react"
-import { sampleProducts } from "@/lib/data/products"
+// import { sampleProducts } from "@/lib/data/products"
 import { BlogPost } from "@/lib/blog"
 import Image from "next/image"
 
+import { Product } from "@/lib/types/product"
+
 interface SearchResultsProps {
     initialPosts: BlogPost[]
+    initialProducts: Product[]
 }
 
-export function SearchResults({ initialPosts }: SearchResultsProps) {
+export function SearchResults({ initialPosts, initialProducts }: SearchResultsProps) {
     const searchParams = useSearchParams()
     const initialQuery = searchParams.get("q") || ""
     const [query, setQuery] = useState(initialQuery)
     const [activeTab, setActiveTab] = useState("all")
 
     // Filter Products
-    const filteredProducts = sampleProducts.filter(product => {
+    const filteredProducts = initialProducts.filter(product => {
         const searchTerm = query.toLowerCase()
         return (
             product.name.toLowerCase().includes(searchTerm) ||

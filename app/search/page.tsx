@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import { SiteHeader } from "@/components/layout/site-header"
 import { SiteFooter } from "@/components/layout/site-footer"
 import { Breadcrumb } from "@/components/shared/breadcrumb"
-import { SearchResults } from "./search-results"
+import { SearchResults } from "@/components/features/search/search-results"
 
 export const metadata = {
   title: "Search Results - Savaj Seeds",
@@ -12,7 +12,12 @@ export const metadata = {
 // Force dynamic rendering since we are using useSearchParams in the client component
 export const dynamic = "force-dynamic"
 
+import { getAllProducts } from "@/lib/actions/product"
+import { getBlogPosts } from "@/lib/blog"
+
 export default async function SearchPage() {
+  const products = await getAllProducts()
+  const posts = await getBlogPosts()
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -26,7 +31,7 @@ export default async function SearchPage() {
         <section className="py-12 md:py-16">
           <div className="container">
             <Suspense fallback={<SearchResultsSkeleton />}>
-              <SearchResults />
+              <SearchResults initialPosts={posts} initialProducts={products} />
             </Suspense>
           </div>
         </section>

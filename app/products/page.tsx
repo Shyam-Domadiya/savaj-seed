@@ -19,7 +19,13 @@ export const metadata = generateSEOMetadata({
   type: "website",
 })
 
-export default function ProductsPage() {
+import { getAllProducts } from "@/lib/actions/product"
+
+export const dynamic = 'force-dynamic'
+
+export default async function ProductsPage() {
+  const products = await getAllProducts()
+
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: "/" },
     { name: "Products", url: "/products" },
@@ -35,7 +41,7 @@ export default function ProductsPage() {
       </div>
 
       <main className="flex-1">
-        <ProductsContent />
+        <ProductsContent initialProducts={products} />
 
         <section className="py-20 md:py-28 bg-muted/40">
           <div className="container">

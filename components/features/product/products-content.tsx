@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { sampleProducts } from "@/lib/data/products"
+// import { sampleProducts } from "@/lib/data/products"
 import { useProductFilter } from "@/components/features/product/hooks/use-product-filter"
 import { Product } from "@/lib/types/product"
 
@@ -79,7 +79,7 @@ function ProductCard({
   )
 }
 
-export function ProductsContent() {
+export function ProductsContent({ initialProducts }: { initialProducts: Product[] }) {
   const [activeTab, setActiveTab] = useState("all")
 
   const {
@@ -91,7 +91,7 @@ export function ProductsContent() {
     setSort,
     clearFilters
   } = useProductFilter({
-    products: sampleProducts
+    products: initialProducts
   })
 
   // Filter products by category for tabs
@@ -123,7 +123,7 @@ export function ProductsContent() {
               conditions.
             </p>
             <div className="flex items-center justify-center gap-4">
-              <ProductComparison availableProducts={sampleProducts} />
+              <ProductComparison availableProducts={initialProducts} />
               <div className="text-sm text-muted-foreground">
                 {filterStats.filteredCount} of {filterStats.totalProducts} products
               </div>

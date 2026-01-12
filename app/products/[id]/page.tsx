@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
-import { getProductById } from "@/lib/data/products"
+import { getProductById } from "@/lib/actions/product"
 import { generateMetadata as generateSEOMetadata, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo"
 import { Star, Download, Leaf, Clock, TrendingUp } from "lucide-react"
 import { DownloadGuideButton } from "@/components/features/product/download-guide-button"
@@ -28,7 +28,7 @@ interface ProductPageProps {
 
 export async function generateMetadata({ params }: ProductPageProps) {
   const { id } = await params
-  const product = getProductById(id)
+  const product = await getProductById(id)
 
   if (!product) {
     return {
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
     title: product.seoMetadata.title,
     description: product.seoMetadata.description,
     keywords: product.seoMetadata.keywords,
-    url: `/ products / ${id} `,
+    url: `/products/${id}`,
     type: 'website',
     image: product.images[0]?.url || '/images/logo.png',
   })
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params
-  const product = getProductById(id)
+  const product = await getProductById(id)
 
   if (!product) {
     notFound()
