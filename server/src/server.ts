@@ -6,6 +6,7 @@ import connectDB from './config/db';
 import authRoutes from './routes/authRoutes';
 import userRoutes from './routes/userRoutes';
 import contactRoutes from './routes/contactRoutes';
+import productRoutes from './routes/productRoutes';
 import { notFound, errorHandler } from './middleware/errorMiddleware';
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/products', productRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('API is running...');

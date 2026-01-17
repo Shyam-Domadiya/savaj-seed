@@ -11,6 +11,8 @@ import { Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/context/AuthContext"
 
+import { ThemeToggle } from "@/components/layout/theme-toggle"
+
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -35,7 +37,7 @@ export function SiteHeader() {
             alt="Savaj Seeds logo"
             width={180}
             height={80}
-            className="h-14 w-auto"
+            className="h-14 w-auto dark:brightness-0 dark:invert"
             priority
           />
           <ScreenReaderOnly>
@@ -80,7 +82,9 @@ export function SiteHeader() {
               </Button>
             </Link>
           )}
-          {/* Weather Widget removed as per user request */}
+
+          <ThemeToggle />
+
           <Link href="/search">
             <div className="inline-flex items-center justify-center h-10 w-10 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors">
               <Search className="h-5 w-5" />

@@ -79,39 +79,44 @@ export function HomeContent({ cropCalendar }: { cropCalendar: React.ReactNode })
                                 description: "Every batch is rigorously tested to ensure 98%+ germination rates.",
                                 icon: Sprout,
                                 gradient: "from-green-500/10 to-emerald-500/10",
-                                iconColor: "text-green-600"
+                                iconColor: "text-green-600 dark:text-green-400",
+                                href: "/about"
                             },
                             {
                                 title: "Disease Resistant",
                                 description: "Genetically strong varieties that naturally resist common pests.",
                                 icon: ShieldCheck,
                                 gradient: "from-blue-500/10 to-cyan-500/10",
-                                iconColor: "text-blue-600"
+                                iconColor: "text-blue-600 dark:text-blue-400",
+                                href: "/products"
                             },
                             {
                                 title: "Higher Yield",
                                 description: "Scientifically developed hybrids designed to maximize production.",
                                 icon: Award,
                                 gradient: "from-amber-500/10 to-orange-500/10",
-                                iconColor: "text-amber-600"
+                                iconColor: "text-amber-600 dark:text-amber-400",
+                                href: "/products"
                             },
                             {
                                 title: "Expert Support",
                                 description: "Access to our team of agricultural experts for guidance.",
                                 icon: Users,
                                 gradient: "from-purple-500/10 to-pink-500/10",
-                                iconColor: "text-purple-600"
+                                iconColor: "text-purple-600 dark:text-purple-400",
+                                href: "/contact"
                             }
                         ].map((feature, index) => (
-                            <div
+                            <Link
                                 key={index}
-                                className="group relative bg-white/50 backdrop-blur-sm border border-white/20 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-in fade-in-50 slide-in-from-bottom-8 fill-mode-backwards"
+                                href={feature.href}
+                                className="group block relative bg-white/60 dark:bg-card/40 backdrop-blur-md border border-white/20 dark:border-white/10 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-in fade-in-50 slide-in-from-bottom-8 fill-mode-backwards cursor-pointer"
                                 style={{ animationDelay: `${index * 100}ms` }}
                             >
                                 <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
 
                                 <div className="relative z-10">
-                                    <div className={`inline-flex items-center justify-center h-14 w-14 rounded-xl bg-white shadow-sm mb-6 ${feature.iconColor} group-hover:scale-110 transition-transform duration-300`}>
+                                    <div className={`inline-flex items-center justify-center h-14 w-14 rounded-xl bg-white dark:bg-white/10 shadow-sm dark:shadow-none mb-6 ${feature.iconColor} group-hover:scale-110 transition-transform duration-300`}>
                                         <feature.icon className="h-7 w-7" />
                                     </div>
                                     <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
@@ -121,7 +126,7 @@ export function HomeContent({ cropCalendar }: { cropCalendar: React.ReactNode })
                                         {feature.description}
                                     </p>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

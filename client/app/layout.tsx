@@ -194,7 +194,12 @@ export default function RootLayout({
       </head>
       <body className={`font-sans antialiased`}>
 
-        <Providers>
+        <Providers
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <SkipNav />
           {children}
           <BackToTop />

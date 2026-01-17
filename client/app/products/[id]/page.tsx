@@ -19,6 +19,7 @@ import { getProductById } from "@/lib/actions/product"
 import { generateMetadata as generateSEOMetadata, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo"
 import { Star, Download, Leaf, Clock, TrendingUp, Sprout, Wheat, Dna, Package } from "lucide-react"
 import { DownloadGuideButton } from "@/components/features/product/download-guide-button"
+import { ProductQRCode } from "@/components/features/product/product-qr"
 
 interface ProductPageProps {
   params: Promise<{
@@ -140,6 +141,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   <p className="text-muted-foreground font-medium uppercase tracking-widest mt-2 text-sm">premium series</p>
                 </div>
               )}
+            </div>
+
+            {/* QR Code for Desktop (Hidden on mobile) */}
+            <div className="hidden lg:flex justify-end -mt-10 relative z-10 px-4">
+              <ProductQRCode url={`https://savajseeds.com/products/${id}`} productName={product.name} />
             </div>
 
             {/* Quick stats for Mobile/Tablet (Stacked below image) */}

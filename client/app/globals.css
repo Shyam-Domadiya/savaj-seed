@@ -4,76 +4,64 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Professional, high-end agricultural color palette with warm earth tones */
-  --background: oklch(0.98 0.005 85);
-  --foreground: oklch(0.25 0.015 85);
+  /* Premium Agricultural Palette: Ivory, Forest Green, and Earth Tones */
+  --background: oklch(0.99 0.005 150); /* Ultra-clean ivory with a hint of green */
+  --foreground: oklch(0.15 0.02 150);   /* Deep forest charcoal */
+  
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.25 0.015 85);
+  --card-foreground: oklch(0.15 0.02 150);
+  
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.25 0.015 85);
-  --primary: oklch(0.42 0.08 155);
-  --primary-foreground: oklch(0.99 0.005 85);
-  --secondary: oklch(0.58 0.11 75);
-  --secondary-foreground: oklch(0.99 0.005 85);
-  --muted: oklch(0.94 0.008 85);
-  --muted-foreground: oklch(0.5 0.015 85);
-  --accent: oklch(0.62 0.14 125);
-  --accent-foreground: oklch(0.99 0.005 85);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.99 0.005 85);
-  --border: oklch(0.9 0.008 85);
-  --input: oklch(0.9 0.008 85);
-  --ring: oklch(0.42 0.08 155);
-  --chart-1: oklch(0.42 0.08 155);
-  --chart-2: oklch(0.62 0.14 125);
-  --chart-3: oklch(0.58 0.11 75);
-  --chart-4: oklch(0.38 0.12 45);
-  --chart-5: oklch(0.48 0.08 100);
+  --popover-foreground: oklch(0.15 0.02 150);
+  
+  --primary: oklch(0.45 0.12 150);     /* Rich Savaj Green - Established & Trustworthy */
+  --primary-foreground: oklch(0.99 0.01 150);
+  
+  --secondary: oklch(0.4 0.04 60);      /* Earth Brown - Soil & Foundation */
+  --secondary-foreground: oklch(0.99 0.01 150);
+  
+  --muted: oklch(0.96 0.01 150);       /* Soft Green-Grey */
+  --muted-foreground: oklch(0.4 0.02 150);
+  
+  --accent: oklch(0.75 0.18 140);      /* Vibrant Sprout - Growth & Energy */
+  --accent-foreground: oklch(0.15 0.02 150);
+  
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.99 0.01 150);
+  
+  --border: oklch(0.9 0.02 150);
+  --input: oklch(0.9 0.02 150);
+  --ring: oklch(0.45 0.12 150);
+  
   --radius: 0.75rem;
-  --sidebar: oklch(0.98 0.005 85);
-  --sidebar-foreground: oklch(0.25 0.015 85);
-  --sidebar-primary: oklch(0.42 0.08 155);
-  --sidebar-primary-foreground: oklch(0.99 0.005 85);
-  --sidebar-accent: oklch(0.94 0.008 85);
-  --sidebar-accent-foreground: oklch(0.25 0.015 85);
-  --sidebar-border: oklch(0.9 0.008 85);
-  --sidebar-ring: oklch(0.42 0.08 155);
 }
 
 .dark {
-  /* Refined dark mode with warm undertones */
-  --background: oklch(0.15 0.015 85);
-  --foreground: oklch(0.96 0.005 85);
-  --card: oklch(0.18 0.015 85);
-  --card-foreground: oklch(0.96 0.005 85);
-  --popover: oklch(0.18 0.015 85);
-  --popover-foreground: oklch(0.96 0.005 85);
-  --primary: oklch(0.55 0.1 155);
-  --primary-foreground: oklch(0.15 0.015 85);
-  --secondary: oklch(0.65 0.12 75);
-  --secondary-foreground: oklch(0.15 0.015 85);
-  --muted: oklch(0.25 0.015 85);
-  --muted-foreground: oklch(0.65 0.015 85);
-  --accent: oklch(0.68 0.14 125);
-  --accent-foreground: oklch(0.15 0.015 85);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.96 0.005 85);
-  --border: oklch(0.28 0.015 85);
-  --input: oklch(0.28 0.015 85);
-  --ring: oklch(0.55 0.1 155);
-  --chart-1: oklch(0.55 0.1 155);
-  --chart-2: oklch(0.68 0.14 125);
-  --chart-3: oklch(0.65 0.12 75);
-  --chart-4: oklch(0.48 0.12 45);
-  --chart-5: oklch(0.55 0.08 100);
-  --sidebar: oklch(0.18 0.015 85);
-  --sidebar-foreground: oklch(0.96 0.005 85);
-  --sidebar-primary: oklch(0.55 0.1 155);
-  --sidebar-primary-foreground: oklch(0.15 0.015 85);
-  --sidebar-accent: oklch(0.25 0.015 85);
-  --sidebar-accent-foreground: oklch(0.96 0.005 85);
-  --sidebar-border: oklch(0.28 0.015 85);
-  --sidebar-ring: oklch(0.55 0.1 155);
+  /* Midnight Forest Aesthetic */
+  --background: oklch(0.12 0.015 150); /* Deep midnight green */
+  --foreground: oklch(0.95 0.01 150);   /* Soft ivory text */
+  
+  --card: oklch(0.15 0.015 150);       /* Slightly lighter forest background */
+  --card-foreground: oklch(0.95 0.01 150);
+  
+  --popover: oklch(0.14 0.015 150);
+  --popover-foreground: oklch(0.95 0.01 150);
+  
+  --primary: oklch(0.65 0.15 150);     /* High-visibility Leaf Green */
+  --primary-foreground: oklch(0.1 0.02 150);
+  
+  --secondary: oklch(0.55 0.08 70);    /* Warm Clay */
+  --secondary-foreground: oklch(0.1 0.02 150);
+  
+  --muted: oklch(0.2 0.02 150);        /* Deep shadow green */
+  --muted-foreground: oklch(0.7 0.01 150);
+  
+  --accent: oklch(0.7 0.2 145);        /* Fluorescent sprout green */
+  --accent-foreground: oklch(0.1 0.02 150);
+  
+  --border: oklch(0.22 0.02 150);
+  --input: oklch(0.22 0.02 150);
+  --ring: oklch(0.65 0.15 150);
 }
 
 @theme inline {

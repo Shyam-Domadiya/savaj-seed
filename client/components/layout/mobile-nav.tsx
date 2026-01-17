@@ -11,6 +11,8 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/shared/anima
 import { Menu, X, Home, Package, Phone, Info, HelpCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+import { ThemeToggle } from "@/components/layout/theme-toggle"
+
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/about", label: "About", icon: Info },
@@ -139,7 +141,10 @@ export function MobileNav({ className }: MobileNavProps) {
           <div className="flex flex-col h-full">
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-border/50">
-              <h2 className="text-lg font-semibold">Navigation</h2>
+              <div className="flex items-center gap-4">
+                <h2 className="text-lg font-semibold">Navigation</h2>
+                <ThemeToggle />
+              </div>
               <Button
                 variant="ghost"
                 size="icon"

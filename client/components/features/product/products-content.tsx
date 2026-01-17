@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useState } from "react"
 import { ProductFilter } from "@/components/features/product/product-filter"
 import { ProductComparison } from "@/components/features/product/product-comparison"
@@ -94,79 +95,76 @@ function ProductCard({
   const visuals = getCategoryVisuals(product.category);
 
   return (
-    <Card className="h-full flex flex-col hover:shadow-xl transition-all duration-300 border-border/50 group hover:-translate-y-1 cursor-pointer overflow-hidden bg-card">
-      {/* Image / Visual Header */}
-      <div className={`relative aspect-[4/3] w-full overflow-hidden ${visuals.gradient} flex items-center justify-center`}>
-        {product.images?.[0]?.url ? (
-          <img
-            src={product.images[0].url}
-            alt={product.images[0].altText || product.name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-        ) : (
-          <div className="flex flex-col items-center justify-center text-center p-6 group-hover:scale-110 transition-transform duration-500">
-            <span className="text-6xl mb-2 filter drop-shadow-sm">{visuals.icon}</span>
-            <span className={`text-sm font-semibold uppercase tracking-wider ${visuals.color} opacity-80`}>
-              {product.category}
+    <Link href={`/products/${product.id}`} className="block h-full group">
+      <Card className="h-full flex flex-col hover:shadow-xl transition-all duration-300 border-border/50 hover:-translate-y-1 cursor-pointer overflow-hidden bg-card">
+        {/* Image / Visual Header */}
+        <div className={`relative aspect-[4/3] w-full overflow-hidden ${visuals.gradient} flex items-center justify-center`}>
+          {product.images?.[0]?.url ? (
+            <img
+              src={product.images[0].url}
+              alt={product.images[0].altText || product.name}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center text-center p-6 group-hover:scale-110 transition-transform duration-500">
+              <span className="text-6xl mb-2 filter drop-shadow-sm">{visuals.icon}</span>
+              <span className={`text-sm font-semibold uppercase tracking-wider ${visuals.color} opacity-80`}>
+                {product.category}
+              </span>
+            </div>
+          )}
+
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+            <span className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 rounded-md px-3 shadow-lg translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+              View Details
             </span>
           </div>
-        )}
 
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-          <Button
-            variant="secondary"
-            size="sm"
-            className="font-medium shadow-lg translate-y-4 group-hover:translate-y-0 transition-all duration-300"
-            asChild
-          >
-            <a href={`/products/${product.id}`}>View Details</a>
-          </Button>
-        </div>
-
-        {product.featured && (
-          <div className="absolute top-3 right-3">
-            <Badge className="bg-primary/90 hover:bg-primary shadow-sm backdrop-blur-md">
-              Featured
-            </Badge>
-          </div>
-        )}
-      </div>
-
-      <div className="flex flex-col flex-1 p-5 space-y-4">
-        {/* Title & basic info */}
-        <div>
-          <div className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wide">
-            {product.subcategory !== 'General' ? product.subcategory : product.category}
-          </div>
-          <CardTitle className="text-xl font-bold leading-tight group-hover:text-primary transition-colors duration-200 text-balance">
-            {product.name}
-          </CardTitle>
-        </div>
-
-        {/* Excel Data Fields - Highlighted */}
-        <div className="space-y-3 bg-muted/30 p-3 rounded-lg border border-border/50">
-          {product.morphologicalCharacters && (
-            <div className="space-y-1">
-              <p className="text-sm leading-snug text-foreground/90 font-medium line-clamp-2" title={product.morphologicalCharacters}>
-                {product.morphologicalCharacters}
-              </p>
-            </div>
-          )}
-
-          {product.seedColor && (
-            <div className="flex items-center gap-2 text-sm border-t border-border/40 pt-2 mt-2">
-              <span className="text-muted-foreground text-xs font-medium">Color:</span>
-              <span className="font-medium text-foreground">{product.seedColor}</span>
+          {product.featured && (
+            <div className="absolute top-3 right-3">
+              <Badge className="bg-primary/90 hover:bg-primary shadow-sm backdrop-blur-md">
+                Featured
+              </Badge>
             </div>
           )}
         </div>
 
-        <div className="mt-auto pt-2 flex flex-wrap gap-2">
-          <Badge variant="outline" className="bg-background/50">{product.seasonality[0]}</Badge>
-          <Badge variant="outline" className="bg-background/50">{product.difficultyLevel}</Badge>
+        <div className="flex flex-col flex-1 p-5 space-y-4">
+          {/* Title & basic info */}
+          <div>
+            <div className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wide">
+              {product.subcategory !== 'General' ? product.subcategory : product.category}
+            </div>
+            <CardTitle className="text-xl font-bold leading-tight group-hover:text-primary transition-colors duration-200 text-balance">
+              {product.name}
+            </CardTitle>
+          </div>
+
+          {/* Excel Data Fields - Highlighted */}
+          <div className="space-y-3 bg-muted/30 p-3 rounded-lg border border-border/50">
+            {product.morphologicalCharacters && (
+              <div className="space-y-1">
+                <p className="text-sm leading-snug text-foreground/90 font-medium line-clamp-2" title={product.morphologicalCharacters}>
+                  {product.morphologicalCharacters}
+                </p>
+              </div>
+            )}
+
+            {product.seedColor && (
+              <div className="flex items-center gap-2 text-sm border-t border-border/40 pt-2 mt-2">
+                <span className="text-muted-foreground text-xs font-medium">Color:</span>
+                <span className="font-medium text-foreground">{product.seedColor}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="mt-auto pt-2 flex flex-wrap gap-2">
+            <Badge variant="outline" className="bg-background/50">{product.seasonality[0]}</Badge>
+            <Badge variant="outline" className="bg-background/50">{product.difficultyLevel}</Badge>
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+    </Link>
   )
 }
 
