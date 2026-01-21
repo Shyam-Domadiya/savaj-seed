@@ -3,8 +3,6 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db';
-import authRoutes from './routes/authRoutes';
-import userRoutes from './routes/userRoutes';
 import contactRoutes from './routes/contactRoutes';
 import productRoutes from './routes/productRoutes';
 import { notFound, errorHandler } from './middleware/errorMiddleware';
@@ -26,8 +24,6 @@ app.use(cors({
 app.use(cookieParser());
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/products', productRoutes);
 

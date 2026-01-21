@@ -7,17 +7,13 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 
 import { ConsentBanner } from "@/components/providers/consent-banner"
 
-import { AuthProvider } from "@/context/AuthContext"
-
 export function Providers({ children, ...props }: ThemeProviderProps) {
     return (
         <NextThemesProvider {...props}>
-            <AuthProvider>
-                <TooltipProvider>
-                    {children}
-                    <ConsentBanner />
-                </TooltipProvider>
-            </AuthProvider>
+            <TooltipProvider>
+                {children}
+                <ConsentBanner />
+            </TooltipProvider>
         </NextThemesProvider>
     )
 }

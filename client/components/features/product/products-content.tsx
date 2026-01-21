@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { useState } from "react"
 import { ProductFilter } from "@/components/features/product/product-filter"
-import { ProductComparison } from "@/components/features/product/product-comparison"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -198,10 +197,6 @@ export function ProductsContent({ initialProducts }: { initialProducts: Product[
               conditions.
             </p>
             <div className="flex items-center justify-center gap-4">
-              <ProductComparison availableProducts={initialProducts} />
-              <div className="text-sm text-muted-foreground">
-                {filterStats.filteredCount} of {filterStats.totalProducts} products
-              </div>
             </div>
           </div>
         </div>
